@@ -70,7 +70,9 @@ bool Initialize(size_t argc, LPCTSTR* argv)
 	generic.add_options()
 		("help,h", "produce this help message")
 		("working-folder,w", boost::program_options::value<std::string>(&WORKING_FOLDER), "working directory (default current directory)")
-		("config-file,c", boost::program_options::value<std::string>(&OPT::strConfigFileName)->default_value(APPNAME _T(".cfg")), "file name containing program options")
+        ("current-folder,cf", boost::program_options::value<std::string>(&CURRENT_FOLDER), "current directory (default current directory)")
+
+        ("config-file,c", boost::program_options::value<std::string>(&OPT::strConfigFileName)->default_value(APPNAME _T(".cfg")), "file name containing program options")
 		("archive-type", boost::program_options::value(&OPT::nArchiveType)->default_value(2), "project archive type: 0-text, 1-binary, 2-compressed binary")
 		("process-priority", boost::program_options::value(&OPT::nProcessPriority)->default_value(-1), "process priority (below normal by default)")
 		("max-threads", boost::program_options::value(&OPT::nMaxThreads)->default_value(0), "maximum number of threads (0 for using all available cores)")
@@ -145,7 +147,8 @@ bool Initialize(size_t argc, LPCTSTR* argv)
 	}
 
 	// initialize the log file
-	OPEN_LOGFILE(MAKE_PATH(APPNAME _T("-")+Util::getUniqueName(0)+_T(".log")).c_str());
+//	OPEN_LOGFILE(MAKE_PATH(APPNAME _T("-")+Util::getUniqueName(0)+_T(".log")).c_str());
+    OPEN_LOGFILE(MAKE_PATH(_T("logs/") APPNAME _T("-")+Util::getUniqueName(0)+_T(".log")));
 
 	// print application details: version and command line
 	Util::LogBuild();

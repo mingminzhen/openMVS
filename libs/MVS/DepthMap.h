@@ -71,7 +71,7 @@
 #define DENSE_EXP DENSE_EXP_DEFUALT
 
 #define ComposeDepthFilePathBase(b, i, e) MAKE_PATH(String::FormatString((b + "%04u." e).c_str(), i))
-#define ComposeDepthFilePath(i, e) MAKE_PATH(String::FormatString("depth%04u." e, i))
+#define ComposeDepthFilePath(i, e) MAKE_PATH("depth/" + String::FormatString("depth%04u." e, i))
 
 
 // S T R U C T S ///////////////////////////////////////////////////

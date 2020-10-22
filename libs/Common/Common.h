@@ -85,14 +85,19 @@ namespace SEACAVE { extern int g_nVerbosityLevel; }
 namespace SEACAVE {
 class String;
 extern String g_strWorkingFolder; // empty by default (current folder)
+extern String g_strCurrentFolder;
 extern String g_strWorkingFolderFull; // full path to current folder
 }
+
+#define CURRENT_FOLDER      g_strCurrentFolder  //current working folder
 #define WORKING_FOLDER		g_strWorkingFolder // empty by default (current folder)
 #define WORKING_FOLDER_FULL	g_strWorkingFolderFull // full path to current folder
 #endif
 #define INIT_WORKING_FOLDER	{SEACAVE::Util::ensureValidFolderPath(WORKING_FOLDER); WORKING_FOLDER_FULL = SEACAVE::Util::getFullPath(WORKING_FOLDER);} // initialize working folders
 #define MAKE_PATH(str)		SEACAVE::Util::getSimplifiedPath(WORKING_FOLDER+(str)) // add working directory to the given file name
-#define MAKE_PATH_SAFE(str)	(SEACAVE::Util::isFullPath(str) ? SEACAVE::String(str) : MAKE_PATH(str)) // add working directory to the given file name only if not full path already
+#define MAKE_CURRENT_PATH(str) SEACAVE::Util::getSimplifiedPath(CURRENT_FOLDER+(str))
+
+#define MAKE_PATH_SAFE(str)	(SEACAVE::Util::isFullPath(str) ? SEACAVE::String(str) : MAKE_CURRENT_PATH(str)) // add working directory to the given file name only if not full path already
 #define MAKE_PATH_FULL(p,s) (SEACAVE::Util::isFullPath((s).c_str()) ? SEACAVE::String(s) : SEACAVE::Util::getSimplifiedPath((p)+(s))) // add the given path to the given file name
 #define MAKE_PATH_REL(p,s)	((s).compare(0,(p).size(),p) ? SEACAVE::String(s) : SEACAVE::String(SEACAVE::String((s).substr((p).size())))) // remove the given path from the given file name
 #define GET_PATH_FULL(str)	(SEACAVE::Util::isFullPath((str).c_str()) ? SEACAVE::Util::getFilePath(str) : SEACAVE::Util::getSimplifiedPath(WORKING_FOLDER_FULL+SEACAVE::Util::getFilePath(str))) // retrieve the full path to the given file

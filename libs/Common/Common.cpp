@@ -18,7 +18,7 @@ int g_nVerbosityLevel(2);
 #if TD_VERBOSE == TD_VERBOSE_DEBUG
 int g_nVerbosityLevel(3);
 #endif
-
+String g_strCurrentFolder;
 String g_strWorkingFolder;
 String g_strWorkingFolderFull;
 } // namespace SEACAVE
